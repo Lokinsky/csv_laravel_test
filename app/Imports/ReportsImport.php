@@ -22,7 +22,7 @@ class ReportsImport implements ToModel
     public function getCsvSettings(): array
     {
         return [
-            'delimiter' => "\t",
+            'delimiter' => ";",
             'input_encoding' => 'UCS-2 LE'
         ];
     }

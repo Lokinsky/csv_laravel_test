@@ -45,12 +45,29 @@ class ReportsController extends Controller
         
         $size = Storage::size('reports/report.csv');
         $path = Storage::path('reports/report.csv');
-        
+
         $report_excel_array = Excel::toArray(new ReportsImport, 'reports/report.csv','local');
         $normalized_excel_array = [];
         foreach ($report_excel_array[0] as $num => $row) {
             if($num > 2 && $num < count($report_excel_array[0]) - 6){
-                $merged_rows = array_merge(explode(';', $row[0]), explode(';', $row[0]));
+                
+                $str_col_parsed = '';
+                $str_col_glue = '';
+                $merged_rows = [];
+
+                foreach ($row as $key => $col) {
+                    if($col && isset($col[$key+1]) && $col[$key+1]>0 && $key < count($row)){
+                        $str_col_parsed.=$col.';';
+                    }else $str_col_parsed.=$col;
+                    
+                }
+                foreach (explode(';', $str_col_parsed) as $i => $col) {
+                    if($i > 16){
+                        $str_col_glue.=$col.';';
+                    }else $merged_rows[] = $col;
+                }
+                $merged_rows[] = $str_col_glue;
+
                 $normalized_excel_array[] = [
                     'status' => $merged_rows[0],
                     'account_name' => $merged_rows[1],

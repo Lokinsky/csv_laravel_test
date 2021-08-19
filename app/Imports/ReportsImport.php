@@ -18,4 +18,12 @@ class ReportsImport implements ToModel
             //
         ]);
     }
+
+    public function getCsvSettings(): array
+    {
+        return [
+            'delimiter' => "\t",
+            'input_encoding' => 'UCS-2 LE'
+        ];
+    }
 }

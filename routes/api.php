@@ -19,4 +19,4 @@ use App\Http\Controllers\ReportsController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('reportsupdate',[ReportsController::class,'cron_update_report_by_fyle']);
+Route::get('reportsupdate',[ReportsController::class,'update_report_by_file']);

@@ -13,10 +13,11 @@ class Reports extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->dateTime('date');
-            $table->json('json_csv_rows');
+        Schema::table('reports', function (Blueprint $table) {
+            // $table->bigIncrements('id');
+            // $table->dateTime('date');
+            // $table->json('json_csv_rows');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class Reports extends Migration
      */
     public function down()
     {
-        //
+        Schema:drop('reports');
     }
 }
